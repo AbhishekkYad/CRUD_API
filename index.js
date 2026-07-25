@@ -5,7 +5,7 @@ const swaggerJsdoc = require("swagger-jsdoc");
 const app = express();
 const PORT = 3000;
 
-app.use(express.json());    
+app.use(express.json());
 
 // In-memory task list
 let tasks = [
