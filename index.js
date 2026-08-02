@@ -51,7 +51,6 @@ app.get("/api/todos/:id", (req, res) => {
 
 });
 
-
 app.post("/api/todos", (req, res) => {
 
     const { title } = req.body;
