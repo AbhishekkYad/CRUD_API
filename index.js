@@ -24,3 +24,29 @@ app.get("/api/todos", (req, res) => {
     });
 
 });
+
+app.get("/api/todos/:id", (req, res) => {
+
+    db.get(
+        "SELECT * FROM todos WHERE id=?",
+        [req.params.id],
+        (err, row) => {
+
+            if (err) {
+                return res.status(500).json({
+                    error: err.message
+                });
+            }
+
+            if (!row) {
+                return res.status(404).json({
+                    message: "Todo not found"
+                });
+            }
+
+            res.status(200).json(row);
+
+        }
+    );
+
+});
