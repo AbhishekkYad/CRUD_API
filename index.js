@@ -78,4 +78,34 @@ app.post("/api/todos", (req, res) => {
 
 });
 
+app.put("/api/todos/:id", (req, res) => {
 
+    const { title, completed } = req.body;
+
+    db.run(
+        `UPDATE todos
+         SET title=?, completed=?
+         WHERE id=?`,
+        [title, completed, req.params.id],
+        function (err) {
+
+            if (err) {
+                return res.status(500).json({
+                    error: err.message
+                });
+            }
+
+            if (this.changes === 0) {
+                return res.status(404).json({
+                    message: "Todo not found"
+                });
+            }
+
+            res.status(200).json({
+                message: "Todo updated successfully"
+            });
+
+        }
+    );
+
+});
